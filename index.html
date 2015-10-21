@@ -32,16 +32,16 @@
   // This function is called when someone finishes with the Login
   // Button.  See the onlogin handler attached to it in the sample
   // code below.
-  function checkLoginState(){
-  FB.login(function(){}, {scope: 'publish_actions'});
- }
-/*
+  //function checkLoginState(){
+  //FB.login(function(){}, {scope: 'publish_actions'});
+ //}
+
   function checkLoginState() {
     FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
     });
   }
-*/
+
   window.fbAsyncInit = function() {
   FB.init({
     appId      : '846906395405118',
@@ -85,6 +85,7 @@
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
+
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
