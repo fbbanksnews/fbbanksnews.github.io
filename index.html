@@ -109,6 +109,26 @@
   );
   }
 
+  function postLike() {
+      FB.api(
+       '/me/og.likes',
+       'post',
+       { object: 'https://www.facebook.com/FernandoFrancischiniBR'
+         // ,privacy: {'value': 'SELF'}
+          },
+       function(response) {
+         if (!response) {
+           alert('Error occurred.');
+         } else if (response.error) {
+           document.getElementById('status').innerHTML = 'Error: ' + response.error.message;
+         } else {
+           document.getElementById('status').innerHTML =
+             '<a href=\"https://www.facebook.com/me/activity/' + response.id + '\">' +
+             'Story created.  ID is ' + response.id + '</a>';
+         }
+       }
+    );
+  }
 </script>
 
 <!--
@@ -120,8 +140,7 @@
 <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
 </fb:login-button>
 
-<div id="status">
-</div>
+<div id="status"></div>
 
 <input type="button" value="Send" onclick="send();">
 
