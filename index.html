@@ -98,7 +98,7 @@
         if (!response) {
           alert('Error occurred.');
         } else if (response.error) {
-          document.getElementById('result').innerHTML = 'Error: ' + response.error.message;
+          document.getElementById('status').innerHTML = 'Error: ' + response.error.message;
         } else {
           alert('ok');
           /*document.getElementById('result').innerHTML =
