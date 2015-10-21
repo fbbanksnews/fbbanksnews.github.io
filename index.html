@@ -33,9 +33,7 @@
   // Button.  See the onlogin handler attached to it in the sample
   // code below.
   function checkLoginState(){
-  FB.login(function(response) {
-   // handle the response
- }, {scope: 'public_profile,email,publish_actions'});
+  FB.login(function(){}, {scope: 'publish_actions'});
  }
 /*
   function checkLoginState() {
@@ -53,9 +51,7 @@
     version    : 'v2.2' // use version 2.2
   });
 
-  function myFacebookLogin() {
-    FB.login(function(){}, {scope: 'publish_actions'});
-  }
+
 
   // Now that we've initialized the JavaScript SDK, we call
   // FB.getLoginStatus().  This function gets the state of the
@@ -152,7 +148,7 @@
 
 <div id="status"></div>
 
-<input type="button" value="Send" onclick="myFacebookLogin();">
+<input type="button" value="Send" onclick="postLike();">
 
 </body>
 </html>
