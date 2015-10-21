@@ -1,0 +1,68 @@
+<?php
+session_start();
+// added in v4.0.0
+require_once 'autoload.php';
+use Facebook\FacebookSession;
+use Facebook\FacebookRedirectLoginHelper;
+use Facebook\FacebookRequest;
+use Facebook\FacebookResponse;
+use Facebook\FacebookSDKException;
+use Facebook\FacebookRequestException;
+use Facebook\FacebookAuthorizationException;
+use Facebook\GraphObject;
+use Facebook\Entities\AccessToken;
+use Facebook\HttpClients\FacebookCurlHttpClient;
+use Facebook\HttpClients\FacebookHttpable;
+// init app with app id and secret
+FacebookSession::setDefaultApplication( '846906395405118','1c4813b9ef8f0cd07f35d6ec3ad854b7' );
+// login helper with redirect_uri
+    $helper = new FacebookRedirectLoginHelper('http://localhost/bkp2/teste/fbconfig.php' );
+try {
+  $session = $helper->getSessionFromRedirect();
+} catch( FacebookRequestException $ex ) {
+  // When Facebook returns an error
+} catch( Exception $ex ) {
+  // When validation fails or other local issues
+}
+
+// caso não esteja logado
+if ( isset( $session ) ) {
+  // graph api request for user data
+  $request = new FacebookRequest( $session, 'GET', '/me' );
+  $response = $request->execute();
+  // get response
+  $graphObject = $response->getGraphObject();
+     	$fbid = $graphObject->getProperty('id');              // To Get Facebook ID
+ 	    $fbfullname = $graphObject->getProperty('name'); // To Get Facebook full name
+	    $femail = $graphObject->getProperty('email');    // To Get Facebook email ID
+	/* ---- Session Variables -----*/
+	    $_SESSION['FBID'] = $fbid;
+      $_SESSION['FULLNAME'] = $fbfullname;
+	    $_SESSION['EMAIL'] =  $femail;
+      $_SESSION['TOKEN'] = '846906395405118|so7SwlM9XlVu933KdeBiu-0Dupc';
+
+
+      /* PHP SDK v5.0.0 */
+      /* make the API call */
+      $request = new FacebookRequest(
+        $session,
+        'GET',
+        '/me/og.follows'
+      );
+      $response = $request->execute();
+      $graphObject = $response->getGraphObject();
+      /* handle the result */
+      $albuns = array();
+      foreach($graphObject['data'] as $v) $albuns[] = $v->id;
+      /* PEGA AS FOTOS */
+// $x = 0;
+foreach($albuns as $v){
+	$response = (new FacebookRequest($session, 'GET', "/$v/photos"))->execute()->getGraphObject()->asArray();
+
+	foreach($response['data'] as $fotos){
+		echo '<img src="'.$fotos->picture . '" data-source="'.$fotos->source.'"><br>';
+		// if (++$x === 50) break;
+	}
+	}
+}
+?>

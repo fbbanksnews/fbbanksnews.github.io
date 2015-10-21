@@ -1,0 +1,70 @@
+<html xmlns:fb="http://ogp.me/ns/fb#">
+ <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# oghowto: http://ogp.me/ns/fb/oghowto#">
+  <title>OG Tutorial App</title>
+  <meta property="fb:app_id" content="256521937796214" />
+  <meta property="og:type" content="oghowto:demo" />
+  <meta property="og:title" content="Open Graph HowTo" />
+  <meta property="og:image" content="http://placehold.it/200x200" />
+  <meta property="og:description" content="Minimum requirements to get Open Graph objects and actions working" />
+  <meta property="og:url" content="http://oghowto.herokuapp.com/test.html">
+  <style type="text/css">
+    #container {
+      margin: 25px auto;
+      width: 500px;
+    }
+    h1 {
+      margin: 0;
+    }
+
+  </style>
+  <script>
+    function likeDemo() {
+        FB.api(
+          "/me/og.follows",
+          "POST",
+          {
+            "profile": "151597645187534"
+          },
+            function(response) {
+                console.log(response);
+                if (!response || response.error) {
+                    alert('Error occured');
+                } else {
+                    alert('Demo was liked successfully! Action ID: ' + response.id);
+            }
+        });
+    }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <fb:login-button show-faces="true" width="200" max-rows="1" scope="publish_actions"></fb:login-button>
+    <br><br><br>
+    <h1>Open Graph HowTo</h1>
+    <a href="#" onclick="likeDemo(); return false;" title="">Like Demo!</a>
+    <p>
+      <img title="Open Graph HowTo" src="http://placehold.it/200x200"/>
+    </p>
+  </div>
+
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '846906395405118', // App ID
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        xfbml      : true  // parse XFBML
+      });
+    };
+
+    // Load the SDK Asynchronously
+    (function(d){
+      var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+      js = d.createElement('script'); js.id = id; js.async = true;
+      js.src = "//connect.facebook.net/en_US/all.js";
+      d.getElementsByTagName('head')[0].appendChild(js);
+    }(document));
+  </script>
+</body>
+</html>
