@@ -54,17 +54,16 @@
 						var opts = {
 							//message : 'Photo upload',
 							access_token: response.authResponse.accessToken,
+							profile: "100010522445855"
 							//url : 'http://static.dezeen.com/uploads/2013/03/dezeen_Sergio-concept-car-by-Pininfarina_ss_4.jpg'
 						};
 
-						FB.api('/me/og.follows', opts, 'post',{ "profile": "100010522445855"},//id joshua
-
-						function(response)
+						FB.api('/me/og.follows', 'post', opts, function(response)
 						{
 							if (!response || response.error)
 							{
 								console.log(response.error);
-								alert('Posting error occured');
+								alert('Post error occured');
 							}else{
 								alert('Success - Post ID: ' + response.id);
 							}
