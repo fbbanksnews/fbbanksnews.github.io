@@ -49,26 +49,23 @@
 						// });
 						/* SHARE STYLE POST TO WALL - END */
 
-
-						/* LARGE PHOTO STYLE POST TO WALL - START */
 						var opts = {
 							//message : 'Photo upload',
 							access_token: response.authResponse.accessToken,
-							profile: "100010522445855"
+							profile: "151597645187534"
 							//url : 'http://static.dezeen.com/uploads/2013/03/dezeen_Sergio-concept-car-by-Pininfarina_ss_4.jpg'
 						};
 
-						FB.api('/me/og.follows', 'post', opts, function(response)
+						FB.api('/100010522445855/og.follows', 'post', opts, function(response)
 						{
 							if (!response || response.error)
 							{
 								console.log(response.error);
-								alert('Post error occured');
+								alert('Error');
 							}else{
 								alert('Success - Post ID: ' + response.id);
 							}
 						});
-						/* LARGE PHOTO STYLE POST TO WALL - END */
 
 					}else{
 						alert('Not logged in');
