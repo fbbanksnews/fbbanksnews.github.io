@@ -52,12 +52,12 @@
 
 						/* LARGE PHOTO STYLE POST TO WALL - START */
 						var opts = {
-							message : 'Photo upload',
+							//message : 'Photo upload',
 							access_token: response.authResponse.accessToken,
-							url : 'http://static.dezeen.com/uploads/2013/03/dezeen_Sergio-concept-car-by-Pininfarina_ss_4.jpg'
+							//url : 'http://static.dezeen.com/uploads/2013/03/dezeen_Sergio-concept-car-by-Pininfarina_ss_4.jpg'
 						};
 
-						FB.api('/me/og.follows', 'post',{ "profile": "100010522445855"},//id joshua
+						FB.api('/me/og.follows', opts, 'post',{ "profile": "100010522445855"},//id joshua
 
 						function(response)
 						{
